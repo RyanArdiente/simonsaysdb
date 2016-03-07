@@ -1,5 +1,7 @@
 package rest.pojos;
 
+import java.util.Comparator;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="scores")
 @NamedQueries({@NamedQuery(name= "Score.getAllScores", query ="select s from Score s")})
-public class Score
+public class Score implements Comparator<Score>
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,6 +51,12 @@ public class Score
 	@Override
 	public String toString(){
 		return "Name: " + this.name + " Score: " + this.score;
+	}
+	@Override
+	public int compare(Score o1, Score o2)
+	{
+		// TODO Auto-generated method stub
+		return  o2.getScore() - o1.getScore();
 	}
 	
 }
